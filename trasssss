@@ -1,0 +1,49 @@
+<plugin>
+	<groupId>com.google.code.maven-replacer-plugin</groupId>
+	<artifactId>replacer</artifactId>
+	<executions>
+		<execution>
+			<id>removeUnusedAnnotationImports</id>
+			<phase>process-resources</phase>
+			<goals>
+				<goal>replace</goal>
+			</goals>
+			<configuration>
+				<basedir>${project.basedir}</basedir>
+				<includes>
+					<include>target/generated-sources/openapi/**/*.java</include>
+				</includes>
+				<regex>false</regex>
+				<replacements>
+					<replacement>
+						<token>import io.swagger.annotations.ApiModel;</token>
+						<value />
+					</replacement>
+					<replacement>
+						<token>import io.swagger.annotations.ApiModelProperty;</token>
+						<value />
+					</replacement>
+				</replacements>
+			</configuration>
+		</execution>
+		<execution>
+			<id>removeUnusedAnnotations</id>
+			<phase>process-resources</phase>
+			<goals>
+				<goal>replace</goal>
+			</goals>
+			<configuration>
+				<basedir>${project.basedir}</basedir>
+				<includes>
+					<include>target/generated-sources/openapi/**/*.java</include>
+				</includes>
+				<replacements>
+					<replacement>
+						<token>@ApiModel.*\)</token>
+						<value />
+					</replacement>
+				</replacements>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>				
